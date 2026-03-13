@@ -5,19 +5,30 @@ router = APIRouter()
 
 @router.post("/webhook")
 async def github_webhook(request: Request):
+
     payload = await request.json()
+
     action = payload.get("action")
 
-    # Only react to opened PRs for now
+    # Trigger when PR is opened
     if action == "opened":
+
         pr_number = payload["pull_request"]["number"]
-        print(f"New PR opened: #{pr_number}")
+
+        print("\n🔥 NEW PULL REQUEST RECEIVED")
+        print(f"PR Number: {pr_number}")
+        print("Fetching changed files...\n")
 
         pr_files = fetch_pr_files(pr_number)
 
         for file in pr_files:
-            print(f"File: {file['filename']}, Status: {file['status']}")
-            print(file['patch'])
-            print("--------")
+
+            print("================================")
+            print(f"File: {file['filename']}")
+            print(f"Status: {file['status']}")
+            print("Code Changes:\n")
+
+            print(file["patch"])
+            print("================================\n")
 
     return {"status": "received"}
