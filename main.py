@@ -7,4 +7,4 @@ app.include_router(router)
 
 @app.get("/")
 def home():
-    return {"message": "AI PR Reviewer Running"}
+    return {"message": "AI PR Reviewer Running helloooo"}
