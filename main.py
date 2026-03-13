@@ -12,7 +12,7 @@ def home():
     <html>
         <head><title>AI PR Reviewer</title></head>
         <body>
-            <h1>AI PR Reviewer Running ✅</h1>
+            <h1>AI PR Reviewer Running perfectly ✅</h1>
             <p>Waiting for Pull Request events from GitHub...</p>
         </body>
     </html>
