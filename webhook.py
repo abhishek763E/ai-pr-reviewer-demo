@@ -6,7 +6,7 @@ router = APIRouter()
 @router.post("/webhook")
 async def github_webhook(request: Request):
 
-    payload = await request.json()
+    payload =  await request.json()
 
     action = payload.get("action")
 
