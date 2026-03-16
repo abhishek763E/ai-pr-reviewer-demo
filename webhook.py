@@ -22,6 +22,3 @@ async def github_webhook(request: Request):
         print(f"Total files changed: {len(files)}")
 
     return {"message": "Webhook received"}
-
-def addd(a,b,c):
-    a+b+c
