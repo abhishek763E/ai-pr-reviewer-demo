@@ -3,19 +3,22 @@ import requests
 def review_code(filename, patch):
 
     prompt = f"""
-You are a senior Python code reviewer.
+You are a senior software engineer reviewing a pull request.
 
-Review the following code changes and give feedback.
+Review the following code changes and provide:
+
+1. Bugs or logical issues
+2. Code improvements
+3. Security issues
+4. Performance improvements
+5. Best practice suggestions
 
 File: {filename}
 
-Changes:
+Code changes:
 {patch}
 
-Provide:
-- Bugs
-- Code improvements
-- Security issues
+Respond with clear bullet points.
 """
 
     response = requests.post(
@@ -29,4 +32,4 @@ Provide:
 
     result = response.json()
 
-    return result["response"]
+    return result.get("response", "No review generated.")
