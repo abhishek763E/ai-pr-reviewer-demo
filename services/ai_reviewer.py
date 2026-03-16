@@ -1,32 +1,26 @@
-import requests
+import ollama
 
 def review_code(filename, patch):
-
     prompt = f"""
 You are a senior Python code reviewer.
 
-Review the following code changes and give feedback.
+Review the following pull request change.
 
 File: {filename}
 
-Changes:
+Code diff:
 {patch}
 
 Provide:
-- Bugs
-- Code improvements
-- Security issues
+1. Bugs
+2. Code improvements
+3. Security issues
+4. Best practice suggestions
 """
 
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": "tinyllama",
-            "prompt": prompt,
-            "stream": False
-        }
+    response = ollama.chat(
+        model="codellama",
+        messages=[{"role": "user", "content": prompt}]
     )
 
-    result = response.json()
-
-    return result["response"]
+    return response["message"]["content"]
