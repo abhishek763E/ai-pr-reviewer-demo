@@ -29,3 +29,6 @@ def post_review_comment(pr_number, comment):
 
 def add(a, b):
     return a + b
+
+def mul(a,b):
+    return a*b
