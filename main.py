@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 from webhook import router
 
 app = FastAPI(title="AI PR Reviewer")
+print("testing AI reviewer PR")
 
 app.include_router(router)
 
