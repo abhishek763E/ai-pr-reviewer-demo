@@ -19,7 +19,7 @@ Provide:
 """
 
     response = ollama.chat(
-        model="codellama",
+        model="tinyllama",
         messages=[{"role": "user", "content": prompt}]
     )
 
