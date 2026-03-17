@@ -48,5 +48,3 @@ _AI review generated using local model via Ollama_
 
     return {"status": "received"}
 
-def adddd(a,b):
-    return a+b
