@@ -1,6 +1,11 @@
 from fastapi import APIRouter, Request
-from services.pr_service import fetch_pr_files, post_review_comment
-from services.ai_reviewer import review_code
+from services.pr_service import (
+    fetch_pr_files,
+    run_ai_review_llm,
+    extract_score,
+    format_review,
+    post_review_comment
+)
 
 router = APIRouter()
 
@@ -9,44 +14,52 @@ async def github_webhook(request: Request):
     payload = await request.json()
     action = payload.get("action")
 
-    # Only react when a PR is opened
-    if action == "opened":
-        pr_number = payload["pull_request"]["number"]
-        print(f"New PR opened: #{pr_number}")
+    # ✅ Handle multiple PR events (important)
+    if action in ["opened", "synchronize", "reopened"]:
 
-        pr_files = fetch_pr_files(pr_number)
+        pr = payload["pull_request"]
+        pr_number = pr["number"]
 
-        for file in pr_files:
-            filename = file["filename"]
-            patch = file["patch"]
+        base_branch = pr["base"]["ref"]
+        head_branch = pr["head"]["ref"]
 
-            # Only review Python files
-            if filename.endswith(".py") and patch:
+        print(f"PR #{pr_number}")
+        print(f"Base: {base_branch}, Head: {head_branch}")
 
-                print(f"Reviewing file: {filename}")
+        # ✅ Only allow test-ai-review → main
+        if base_branch == "main" and head_branch == "test-ai-review":
 
-                # Send code diff to AI
-                review = review_code(filename, patch)
+            print("Valid PR direction detected ✅")
 
-                print("AI Review Generated")
-                print(review)
+            pr_files = fetch_pr_files(pr_number)
 
-                # Post AI review comment on the PR
-                post_review_comment(pr_number, f"""
-### 🤖 AI Code Review
+            # Filter only Python files with changes
+            filtered_files = [
+                file for file in pr_files
+                if file["filename"].endswith(".py") and file["patch"]
+            ]
 
-**File:** `{filename}`
+            if not filtered_files:
+                print("No Python files to review ❌")
+                return {"status": "no python files"}
 
-{review}
+            print(f"Reviewing {len(filtered_files)} files...")
 
----
-_AI review generated using local model via Ollama_
-""")
+            # 🔥 Run TinyLlama AI Review
+            review_text = run_ai_review_llm(filtered_files)
 
-                print("Comment posted to PR")
-                print("---------------------------")
+            print("AI Review Generated ✅")
+
+            # 🔢 Extract Score
+            score = extract_score(review_text)
+
+            # 🧾 Format Final Output
+            final_review = format_review(review_text, score)
+
+            # 💬 Post Single Comment
+            post_review_comment(pr_number, final_review)
+
+            print("Comment posted to PR 🚀")
+            print("---------------------------")
 
     return {"status": "received"}
-
-def sub(a,b):
-    return a-b
