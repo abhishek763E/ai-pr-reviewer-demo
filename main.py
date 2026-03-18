@@ -16,6 +16,7 @@ def home():
             <h1>AI PR Reviewer Running s ✅</h1>
             # test change for AI reviewer
             <p>Waiting for Pull Request events from GitHub...</p>
+             <p>Waiting for Pull Request events from GitHub...123445</p>
         </body>
     </html>
     """
@@ -25,3 +26,10 @@ def adddd(a,b):
 
 def add(a,b,c):
     return a+b+c
+
+num = 10
+
+if num % 2 == 0:
+    print("Even number")
+else:
+    print("Odd number")
