@@ -1,3 +1,4 @@
+import ollama
 def review_code(filename, patch):
     prompt = f"""
 You are a senior Python code reviewer.
