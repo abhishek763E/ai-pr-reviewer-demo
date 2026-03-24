@@ -28,3 +28,18 @@ def post_review_comment(pr_number, review):
     pr.create_issue_comment(
         f"### 🤖 AI Code Review\n\n{review}"
     )
+
+
+
+def adddd(a,b):
+    return a+b
+
+def add(a,b,c):
+    return a+b+c
+
+num = 10
+
+if num % 2 == 0:
+    print("Even number")
+else:
+    print("Odd number")

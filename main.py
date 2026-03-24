@@ -21,15 +21,3 @@ def home():
     </html>
     """
 
-def adddd(a,b):
-    return a+b
-
-def add(a,b,c):
-    return a+b+c
-
-num = 10
-
-if num % 2 == 0:
-    print("Even number")
-else:
-    print("Odd number")
