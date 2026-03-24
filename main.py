@@ -20,4 +20,6 @@ def home():
         </body>
     </html>
     """
+def add(a,b):
+    return a+b
 
