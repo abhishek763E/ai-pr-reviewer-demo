@@ -23,4 +23,6 @@ def home():
 def add(a,b):
     return a+b
 
+    print("i am not a robot")
+
 
