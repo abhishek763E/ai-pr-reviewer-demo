@@ -29,5 +29,9 @@ def post_review_comment(pr_number, review):
         f"### 🤖 AI Code Review\n\n{review}"
     )
 
+def sub(a,b):
+    return a-b
+
+
 
 
