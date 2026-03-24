@@ -30,7 +30,7 @@ def post_review_comment(pr_number, review):
     )
 
 def sub(a,b):
-    return a-b
+    return a*b
 
 
 
