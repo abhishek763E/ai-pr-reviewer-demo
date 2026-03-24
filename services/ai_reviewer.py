@@ -1,27 +1,30 @@
 import ollama
 def review_code(filename, patch):
     prompt = f"""
-You are a senior Python code reviewer.
+You are a STRICT senior Python code reviewer.
 
-Review the following code diff line by line.
+Your task is to review the given code diff.
+
+DO NOT say:
+- "I cannot review"
+- "Here is an example"
+- "I am unable"
+
+You MUST review the code.
 
 File: {filename}
 
 Code diff:
 {patch}
 
-Instructions:
-- Show the actual code line in your response
-- Then give issue and suggestion
-- Format strictly like this:
+Format EXACTLY like this:
 
 Line: <code line>
 Issue: <problem>
 Suggestion: <fix>
 
-- Only include lines that need improvement
-- Keep response clean and readable
-- Do NOT skip code lines in output
+- Only include lines with issues
+- Keep answers short and precise
 """
 
     response = ollama.chat(
