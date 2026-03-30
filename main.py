@@ -27,6 +27,11 @@ def add(a,b):
 
 def multi(a,b):
     return a*b
-    print("this is multiplication")
+    print("this is common  multiplication")
+
+
+def multiplication(a,b,c):
+    return a*b*c
+    print("this is common  multiplication")
 
 
