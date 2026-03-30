@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\DELL\OneDrive - RACEFILINGS\Desktop\ai_pr_reviewer\myenv"
+VIRTUAL_ENV="C:\Users\DELL\ai-pr-reviewer-demo\myenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

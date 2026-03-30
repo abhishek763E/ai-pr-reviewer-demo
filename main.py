@@ -25,4 +25,8 @@ def add(a,b):
 
     print("i am not a robot")
 
+def multi(a,b):
+    return a*b
+    print("this is multiplication")
+
 
