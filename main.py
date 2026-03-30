@@ -30,3 +30,8 @@ def multi(a,b):
     print("this is common  multiplication")
 
 
+def multiplication(a,b,c):
+    return a*b*c
+    print("this is common  multiplication")
+
+
